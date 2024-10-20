@@ -1,0 +1,45 @@
+version: "3.7"
+
+networks:
+  web:
+    external: true
+  discourse:
+    external: true
+
+services:
+  caddy:
+    image: oci.fariszr.com/fariszr/caddy-dns:cloudflare-alpine@sha256:41257d70b1eb77d230c119560aedc145fc181b2d7cb0069e3fe56518c1ad1ab8
+    container_name: caddy
+    command: caddy run --watch --config /etc/caddy/Caddyfile --adapter caddyfile 
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      - EMAIL=(email)
+      - CLOUDFLARE_TOKEN=(cloudflare_token)
+    configs:
+      - source: Caddyfile
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - /home/aosus/caddy/configs:/etc/caddy/configs:ro
+      - /home/aosus/caddy/proxy_error_page.html:/srv/proxy_error_page.html:ro
+      - data:/data
+      - config:/config
+    networks:
+      web:
+      discourse:
+
+configs:
+  Caddyfile:
+    file: /home/aosus/caddy/Caddyfile
+
+volumes:
+  data:
+  config:
+  piped-proxy:
+    external: 
+      name: piped_piped-proxy

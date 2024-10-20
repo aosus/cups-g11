@@ -1,0 +1,23 @@
+{
+	email {env.EMAIL}
+	admin off
+	acme_dns cloudflare {env.CLOUDFLARE_TOKEN}
+}
+# generate cert for turn.aosus.org, but don't serve anything
+turn.aosus.org {
+	abort
+}
+
+cups-g11.aosus.org {
+	# tls {
+	# 	key_type rsa4096
+	# }
+	abort
+}
+
+www.aosus.org {
+	redir https://aosus.org{uri}
+	header Cache-Control "max-age=2592000, stale-while-revalidate=2592000"
+}
+
+import /etc/caddy/configs/*.caddyfile

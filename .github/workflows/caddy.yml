@@ -1,0 +1,47 @@
+name: deploy-caddy
+
+on:
+  push:
+    paths:
+      - '.github/workflows/caddy.yml'
+      - 'caddy/**'
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tailscale
+        uses: tailscale/github-action@7a0b30ed3517c2244d1330e39467b95f067a33bd
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_SECRET }}
+          tags: tag:deploy-ci
+          hostname: Github-actions
+          version: ${{ vars.TAILSCALE_VERSION }}
+
+      - name: Add secrets to config files
+        env:
+          CLOUDFLARE_TOKEN: ${{ secrets.cloudflare_token }}
+          EMAIL: ${{ secrets.email }}
+        run: |
+          sed -i "s|(email)|$EMAIL|g" $GITHUB_WORKSPACE/caddy/docker-compose.yml
+          sed -i "s|(cloudflare_token)|$CLOUDFLARE_TOKEN|g" $GITHUB_WORKSPACE/caddy/docker-compose.yml
+
+      - name: Start Deployment
+        uses: FarisZR/docker-compose-gitops-action@v1.0.1
+        env:
+          EMAIL: ${{ secrets.email }}
+        with:
+          remote_docker_host: ${{ secrets.server_address }}
+          tailscale_ssh: true # no need for manual private and public keys
+          compose_file_path: caddy/docker-compose.yml
+          args: -p caddy up -d --remove-orphans
+          upload_directory: true
+          docker_compose_directory: caddy
