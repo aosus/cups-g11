@@ -1,0 +1,39 @@
+name: deploy-docker-mailserver
+
+on:
+  push:
+    paths:
+      - '.github/workflows/docker-mailserver.yml'
+      - 'docker-mailserver/**'
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: Docker-mailserver
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tailscale
+        uses: tailscale/github-action@7a0b30ed3517c2244d1330e39467b95f067a33bd
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_SECRET }}
+          tags: tag:deploy-ci
+          hostname: Github-actions
+          version: ${{ vars.TAILSCALE_VERSION }}
+
+      - name: Start Deployment
+        uses: FarisZR/docker-compose-gitops-action@v1.0.1
+        with:
+          remote_docker_host: ${{ secrets.server_address }}
+          tailscale_ssh: true # no need for manual private and public keys
+          compose_file_path: docker-mailserver/docker-compose.yml
+          args: -p docker-mailserver up -d --remove-orphans
+          upload_directory: true
+          docker_compose_directory: docker-mailserver
