@@ -9,9 +9,9 @@ turn.aosus.org {
 }
 
 cups-g11.aosus.org {
-	# tls {
-	# 	key_type rsa4096
-	# }
+	tls {
+		key_type rsa4096
+	}
 	abort
 }
 
