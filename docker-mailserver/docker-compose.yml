@@ -28,7 +28,18 @@ services:
       - mail-logs:/var/log/mail
       - config:/tmp/docker-mailserver
       - /etc/localtime:/etc/localtime:ro
-      - caddy_data:/caddy-data:ro
+      - type: volume
+        source: caddy_data
+        target: /etc/letsencrypt/live/cups-g11.aosus.org/fullchain.pem
+        volume:
+          nocopy: true
+          subpath: /certificates/acme-v02.api.letsencrypt.org-directory/cups-g11.aosus.org/cups-g11.aosus.org.crt
+      - type: volume
+        source: caddy_data
+        target: /etc/letsencrypt/live/cups-g11.aosus.org/privkey.pem
+        volume:
+          nocopy: true
+          subpath: /certificates/acme-v02.api.letsencrypt.org-directory/cups-g11.aosus.org/cups-g11.aosus.org.key
     restart: always
     stop_grace_period: 1m
     cap_add:
