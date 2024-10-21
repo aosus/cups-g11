@@ -19,7 +19,7 @@ services:
       default:
       web:
     volumes:
-      - html:/var/www/html:rw
+      - /home/aosus/aosus-wordpress/html:/var/www/html:rw
     configs:
       - source: custom-ini
         target: /usr/local/etc/php/conf.d/custom.ini
@@ -35,11 +35,7 @@ services:
       #MARIADB_RANDOM_ROOT_PASSWORD: '1'
       MARIADB_ROOT_PASSWORD: (aosus_wordpress_mariadb_root_password)
     volumes:
-      - mariadb:/var/lib/mysql
-
-volumes:
-  mariadb:
-  html:
+      - /home/aosus/aosus-wordpress/mariadb:/var/lib/mysql
 
 configs:
   custom-ini:
