@@ -15,7 +15,7 @@ services:
       - POSTGRES_PASSWORD=(matrix_postgres_password)
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
-      - /home/aosus/matrix/synapse-postgresql:/var/lib/postgresql/data:rw
+      - /home/aosus/matrix/synapse-postgres:/var/lib/postgresql/data:rw
     networks:
       default:
 
@@ -83,7 +83,7 @@ services:
       - POSTGRES_PASSWORD=(matrix_telegram_postgres_password)
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
-      - /home/aosus/matrix/telegram-postgres:/var/lib/postgresql/data:rw
+      - /home/aosus/matrix/mautrix-telegram/postgres:/var/lib/postgresql/data:rw
     networks:
       default:
 
@@ -106,7 +106,7 @@ services:
       - POSTGRES_PASSWORD=(matrix_discord_postgres_password)
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
-      - /home/aosus/matrix/discord-postgres:/var/lib/postgresql/data:rw
+      - /home/aosus/matrix/mautrix-discord/postgres:/var/lib/postgresql/data:rw
 
 # Discord now requires signed URLs for their CDN, this resolver fetches signed urls using a user token, and redirects the user to it.
   discord-resolver:
