@@ -1,0 +1,160 @@
+networks:
+  default:
+    enable_ipv6: true
+  web:
+    external: true
+
+services:
+  postgres:
+    image: postgres:14.13-alpine@sha256:2d28cf41ec156f9a6dc9489fd3e5b59888f89229d68fc622efbfbe576e114b13
+    restart: always
+    # These will be used in homeserver.yaml later on
+    environment:
+      - POSTGRES_DB=synapse
+      - POSTGRES_USER=synapse
+      - POSTGRES_PASSWORD=(matrix_postgres_password)
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /home/aosus/matrix/synapse-postgresql:/var/lib/postgresql/data:rw
+    networks:
+      default:
+
+
+  synapse:
+    image: ghcr.io/element-hq/synapse:v1.117.0@sha256:070236812ba367a90094fd86df0e160da5643a06e5259154f157d44c4c7a2f31
+    container_name: synapse
+    restart: always
+    volumes:
+      - /home/aosus/matrix/synapse-media_store:/data/media_store:rw
+    environment:
+      - UID=991
+      - GID=991
+      - SYNAPSE_CONFIG_DIR=config
+    configs:
+      - source: synapse-homeserver
+        target: /config/homeserver.yaml
+        uid: "991"
+        gid: "991"
+      - source: synapse-log-config
+        target: /config/log.config
+        uid: "991"
+        gid: "991"
+      - source: mautrix-telegram-appservice
+        target: /app-services/telegram.yaml
+        uid: "991"
+        gid: "991"
+      - source: mautrix-discord-appservice
+        target: /app-services/discord.yaml
+        uid: "991"
+        gid: "991"
+    secrets:
+      - source: matrix-signing-key
+        target: signing.key
+        uid: "991"
+        gid: "991"
+    healthcheck:
+      test: [ "CMD", "curl", "-fSs", "http://localhost:8008/health" ]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      default:
+      web:
+
+  mautrix-telegram:
+    container_name: mautrix-telegram
+    restart: always
+    image: dock.mau.dev/mautrix/telegram:v0.15.2@sha256:ac6dc40851cdf32a7bd9ce485a184c76796491a81d2fa01fe34702958efdc3df
+    configs:
+      - source: mautrix-telegram-appservice
+        target: /data/registration.yaml
+      - source: mautrix-telegram-config
+        target: /data/config.yaml
+    networks:
+      default:
+
+  postgres-telegram:
+    image: postgres:14.13-alpine@sha256:2d28cf41ec156f9a6dc9489fd3e5b59888f89229d68fc622efbfbe576e114b13
+    restart: always
+    environment:
+      - POSTGRES_DB=telegram
+      - POSTGRES_USER=telegram
+      - POSTGRES_PASSWORD=(matrix_telegram_postgres_password)
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /home/aosus/matrix/telegram-postgres:/var/lib/postgresql/data:rw
+    networks:
+      default:
+
+  mautrix-discord:
+    container_name: mautrix-discord
+    restart: always
+    image: dock.mau.dev/mautrix/discord:latest@sha256:4e5236e8057cca76ef0741b8d6f2978eb91e31c272777143424583a3fd9e5ba9 
+    configs:
+      - source: mautrix-discord-appservice
+        target: /data/registration.yaml
+      - source: mautrix-discord-config
+        target: /data/config.yaml
+
+  postgres-discord:
+    image: postgres:14.13-alpine@sha256:2d28cf41ec156f9a6dc9489fd3e5b59888f89229d68fc622efbfbe576e114b13
+    restart: always
+    environment:
+      - POSTGRES_DB=discord
+      - POSTGRES_USER=discord
+      - POSTGRES_PASSWORD=(matrix_discord_postgres_password)
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /home/aosus/matrix/discord-postgres:/var/lib/postgresql/data:rw
+
+# Discord now requires signed URLs for their CDN, this resolver fetches signed urls using a user token, and redirects the user to it.
+  discord-resolver:
+    image: ghcr.io/aosus/discord_cdn:master@sha256:7f3ac0ff060c4fb44e8caeac9e26f80a8d0056ba0e1012b4c2184b3b11a6099d
+    # ports:
+    #   - 3000:3000
+    environment:
+      - TOKEN=(matrix_discord_resolver_account_token)
+      - CACHE=86400 # cache discord links for a day
+    networks:
+      - web
+
+  eturnal:
+    image: ghcr.io/processone/eturnal:edge@sha256:0b55c6bcd12dac31e4acd5a4ab40793b0a2606c8951802fb21d47fc590a802c3
+    user: 0:0 # to access caddy certs
+    ports:
+      - '3478:3478'
+      - '32000-32200:32000-32200'
+      - '3478:3478/udp'
+      - '32000-32200:32000-32200/udp'
+    volumes:
+      - caddy_data:/caddy-data:ro
+    environment:
+      - ETURNAL_USER=root
+    configs:
+      - source: eturnal
+        target: /etc/eturnal.yml
+
+configs:
+  synapse-homeserver:
+    file: /home/aosus/matrix/homeserver.yaml
+  synapse-log-config:
+    file: /home/aosus/matrix/log.config
+  mautrix-telegram-appservice:
+    file: /home/aosus/matrix/mautrix-telegram/app-service-registration.yaml
+  mautrix-telegram-config:
+    file: /home/aosus/matrix/mautrix-telegram/config.yaml
+  mautrix-discord-config:
+    file: /home/aosus/matrix/mautrix-discord/config.yaml
+  mautrix-discord-appservice:
+    file: /home/aosus/matrix/mautrix-discord/app-service-registration.yaml
+  eturnal:
+    file: /home/aosus/matrix/eturnal.yml
+# import key using file created by github runner.
+secrets:
+  matrix-signing-key:
+    file: /home/aosus/matrix/signing.key
+
+volumes:
+  caddy_data:
+    external: true
