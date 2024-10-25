@@ -48,5 +48,5 @@ jobs:
         with:
           remote_host: ${{ secrets.server_address }}
           directory: discourse/containers
-          post_upload_command: /home/aosus/discourse/launcher rebuild app 
+          post_upload_command: /home/aosus/discourse/launcher rebuild standalone 
           remote_destination: /home/aosus/
