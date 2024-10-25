@@ -103,7 +103,7 @@ volumes:
       host: /home/aosus/discourse-data/standalone
       guest: /shared
   - volume:
-      host: /home/aosus/discourse-data/log
+      host: /home/aosus/discourse-data/standalone
       guest: /var/log
 
 ## Plugins go here
