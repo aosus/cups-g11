@@ -1,10 +1,10 @@
-name: deploy-discourse
+name: deploy-discourse-db
 
 on:
   push:
     paths:
       - '.github/workflows/discourse.yml'
-      - 'discourse/app.yml'
+      - 'discourse/db.yml'
     branches: [main]
   workflow_dispatch:
 
@@ -48,5 +48,5 @@ jobs:
         with:
           remote_host: ${{ secrets.server_address }}
           directory: discourse/containers
-          post_upload_command: /home/aosus/discourse/launcher rebuild app 
+          post_upload_command: /home/aosus/discourse/launcher rebuild db 
           remote_destination: /home/aosus/
