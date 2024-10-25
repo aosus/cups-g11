@@ -9,6 +9,6 @@ discourse.aosus.org {
 			root /srv/
 		}
 	}
-	reverse_proxy standalone:80
+	reverse_proxy app:80
 	encode zstd gzip
 }
