@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/discourse.yml'
-      - 'discourse/app.yml'
+      - 'discourse/standalone.yml'
     branches: [main]
   workflow_dispatch:
 
@@ -29,19 +29,17 @@ jobs:
       - name: Add secrets to config files
         env:
           DISCOURSE_SMTP_PASSWORD: ${{ secrets.DISCOURSE_SMTP_PASSWORD }}
-          DISCOURSE_DB_PASSWORD: ${{ secrets.DISCOURSE_DB_PASSWORD }}
           DISCOURSE_MAXMIND_LICENSE_KEY: ${{ secrets.DISCOURSE_MAXMIND_LICENSE_KEY }}
           DISCOURSE_S3_ENDPOINT: ${{ secrets.DISCOURSE_S3_ENDPOINT }}
           DISCOURSE_S3_SECRET_ACCESS_KEY: ${{ secrets.DISCOURSE_S3_SECRET_ACCESS_KEY }}
           DISCOURSE_S3_ACCESS_KEY_ID: ${{ secrets.DISCOURSE_S3_ACCESS_KEY_ID }}
         run: |
-          sed -i "s|(DISCOURSE_SMTP_PASSWORD)|$DISCOURSE_SMTP_PASSWORD|g" $GITHUB_WORKSPACE/discourse/containers/app.yml
-          sed -i "s|(DISCOURSE_DB_PASSWORD)|$DISCOURSE_DB_PASSWORD|g" $GITHUB_WORKSPACE/discourse/containers/app.yml
-          sed -i "s|(DISCOURSE_MAXMIND_LICENSE_KEY)|$DISCOURSE_MAXMIND_LICENSE_KEY|g" $GITHUB_WORKSPACE/discourse/containers/app.yml
-          sed -i "s|(DISCOURSE_S3_ENDPOINT)|$DISCOURSE_S3_ENDPOINT|g" $GITHUB_WORKSPACE/discourse/containers/app.yml
-          sed -i "s|(DISCOURSE_S3_SECRET_ACCESS_KEY)|$DISCOURSE_S3_SECRET_ACCESS_KEY|g" $GITHUB_WORKSPACE/discourse/containers/app.yml
-          sed -i "s|(DISCOURSE_S3_ACCESS_KEY_ID)|$DISCOURSE_S3_ACCESS_KEY_ID|g" $GITHUB_WORKSPACE/discourse/containers/app.yml
-          sed -i "s|(DISCOURSE_DB_PASSWORD)|$DISCOURSE_DB_PASSWORD|g" $GITHUB_WORKSPACE/discourse/containers/db.yml
+          sed -i "s|(DISCOURSE_SMTP_PASSWORD)|$DISCOURSE_SMTP_PASSWORD|g" $GITHUB_WORKSPACE/discourse/containers/standalone.yml
+          sed -i "s|(DISCOURSE_DB_PASSWORD)|$DISCOURSE_DB_PASSWORD|g" $GITHUB_WORKSPACE/discourse/containers/standalone.yml
+          sed -i "s|(DISCOURSE_MAXMIND_LICENSE_KEY)|$DISCOURSE_MAXMIND_LICENSE_KEY|g" $GITHUB_WORKSPACE/discourse/containers/standalone.yml
+          sed -i "s|(DISCOURSE_S3_ENDPOINT)|$DISCOURSE_S3_ENDPOINT|g" $GITHUB_WORKSPACE/discourse/containers/standalone.yml
+          sed -i "s|(DISCOURSE_S3_SECRET_ACCESS_KEY)|$DISCOURSE_S3_SECRET_ACCESS_KEY|g" $GITHUB_WORKSPACE/discourse/containers/standalone.yml
+          sed -i "s|(DISCOURSE_S3_ACCESS_KEY_ID)|$DISCOURSE_S3_ACCESS_KEY_ID|g" $GITHUB_WORKSPACE/discourse/containers/standalone.yml
 
       - name: Start Deployment
         uses: FarisZR/Tailscale-ssh-deploy@main
