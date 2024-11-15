@@ -90,7 +90,7 @@ services:
   mautrix-discord:
     container_name: mautrix-discord
     restart: always
-    image: dock.mau.dev/mautrix/discord:latest@sha256:9ed1b00eea47b9e7a5549773f8294ce214d5ffc26a80da72d1f551a51465ce4f 
+    image: dock.mau.dev/mautrix/discord:latest@sha256:e795c522fdc3da3a3f675ff54b8d10260b050c6ed254fd21727358bc9d01b442 
     configs:
       - source: mautrix-discord-appservice
         target: /data/registration.yaml
