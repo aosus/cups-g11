@@ -56,15 +56,6 @@ env:
   DISCOURSE_DEVELOPER_EMAILS: 'acc@aosus.org'
 
   ## TODO: The SMTP mail server used to validate new accounts and send notifications
-  # SMTP ADDRESS, username, and password are required
-  # WARNING the char '#' in SMTP password can cause problems!
-  # DISCOURSE_SMTP_ADDRESS: smtp.email.me-jeddah-1.oci.oraclecloud.com
-  # DISCOURSE_SMTP_PORT: 587
-  # DISCOURSE_SMTP_USER_NAME: "ocid1.user.oc1..aaaaaaaawotk2inxqyojzscjifrty4d27mjxuoxq3wwhnl5s76xubp7g4rja@ocid1.tenancy.oc1..aaaaaaaamsnkmv7r7ge76cjtcyusdpfyl77loyjfw7epb6rkmqdyz5vlknkq.rf.com"
-  # DISCOURSE_SMTP_PASSWORD: "(Xxk$786>Yj;vZA(xeNP"
-  # DISCOURSE_SMTP_ENABLE_START_TLS: true         # (optional, default true)
-  # DISCOURSE_SMTP_DOMAIN: discourse.aosus.org    # (required by some providers)
-  # DISCOURSE_NOTIFICATION_EMAIL: no-reply@discourse.aosus.org    # (address to send notifications from)
 
   DISCOURSE_SMTP_ADDRESS: cups-g11.aosus.org
   DISCOURSE_SMTP_PORT: 587
@@ -91,7 +82,7 @@ env:
   ## see https://meta.discourse.org/t/-/137387/23 for details
   DISCOURSE_MAXMIND_LICENSE_KEY: (DISCOURSE_MAXMIND_LICENSE_KEY)
 
-  # DISCOURSE_USE_S3: true
+  DISCOURSE_USE_S3: true
   DISCOURSE_S3_REGION: "us-east-1"
   DISCOURSE_S3_INSTALL_CORS_RULE: true
   #DISCOURSE_S3_CONFIGURE_TOMBSTONE_POLICY: false
@@ -116,12 +107,12 @@ volumes:
 ## see https://meta.discourse.org/t/19157 for details
 hooks:
   # required for S3
-  # after_assets_precompile:
-  #   - exec:
-  #       cd: $home
-  #       cmd:
-  #         - sudo -E -u discourse bundle exec rake s3:upload_assets
-  #         - sudo -E -u discourse bundle exec rake s3:expire_missing_assets
+  after_assets_precompile:
+    - exec:
+        cd: $home
+        cmd:
+          - sudo -E -u discourse bundle exec rake s3:upload_assets
+          - sudo -E -u discourse bundle exec rake s3:expire_missing_assets
   after_code:
     - exec:
         cd: $home/plugins
