@@ -113,7 +113,7 @@ presence:
 # If set to 'true', allows any other homeserver to fetch the server's public
 # rooms directory via federation. Defaults to 'false'.
 #
-#allow_public_rooms_over_federation: true
+allow_public_rooms_over_federation: true
 
 # The default room version for newly created rooms.
 #
