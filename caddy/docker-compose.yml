@@ -41,6 +41,3 @@ configs:
 volumes:
   data:
   config:
-  piped-proxy:
-    external: 
-      name: piped_piped-proxy
