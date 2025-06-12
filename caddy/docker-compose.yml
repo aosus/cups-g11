@@ -27,6 +27,7 @@ services:
     volumes:
       - /home/aosus/caddy/configs:/etc/caddy/configs:ro
       - /home/aosus/caddy/proxy_error_page.html:/srv/proxy_error_page.html:ro
+      - /home/aosus/gnulinuxsa-static:/srv/gnulinuxsa-static
       - data:/data
       - config:/config
     networks:
