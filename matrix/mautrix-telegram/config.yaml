@@ -141,7 +141,7 @@ bridge:
     # synced when they send messages. The maximum is 10000, after which the Telegram server
     # will not send any more members.
     # -1 means no limit (which means it's limited to 10000 by the server)
-    max_initial_member_sync: 5000
+    max_initial_member_sync: -1
     # Maximum number of participants in chats to bridge. Only applies when the portal is being created.
     # If there are more members when trying to create a room, the room creation will be cancelled.
     # -1 means no limit (which means all chats can be bridged)
@@ -151,7 +151,7 @@ bridge:
     # list regardless of this setting.
     sync_channel_members: true
     # Whether or not to skip deleted members when syncing members.
-    skip_deleted_members: true
+    skip_deleted_members: false
     # Whether or not to automatically synchronize contacts and chats of Matrix users logged into
     # their Telegram account at startup.
     startup_sync: true
@@ -160,12 +160,12 @@ bridge:
     sync_update_limit: 0
     # Number of most recently active dialogs to create portals for when syncing chats.
     # Set to 0 to remove limit.
-    sync_create_limit: 30
+    sync_create_limit: 0
     # Whether or not to sync and create portals for direct chats at startup.
-    sync_direct_chats: false
+    sync_direct_chats: true
     # The maximum number of simultaneous Telegram deletions to handle.
     # A large number of simultaneous redactions could put strain on your homeserver.
-    max_telegram_delete: 10
+    max_telegram_delete: 1000000
     # Whether or not to automatically sync the Matrix room state (mostly unpuppeted displaynames)
     # at startup and when creating a bridge.
     sync_matrix_state: true
@@ -221,7 +221,7 @@ bridge:
         # gif - converts to animated gif
         # webm - converts to webm video, requires ffmpeg executable with vp9 codec and webm container support
         # webp - converts to animated webp, requires ffmpeg executable with webp codec/container support
-        target: webm
+        target: webp
         # Should video stickers be converted to the specified format as well?
         convert_from_webm: false
         # Arguments for converter. All converters take width and height.
