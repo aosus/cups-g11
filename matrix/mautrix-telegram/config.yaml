@@ -519,13 +519,13 @@ telegram:
     # Device info sent to Telegram.
     device_info:
         # "auto" = OS name+version.
-        device_model: auto
+        device_model: Google Pixel 8 pro
         # "auto" = Telethon version.
-        system_version: auto
+        system_version: SDK 36
         # "auto" = mautrix-telegram version.
-        app_version: auto
-        lang_code: en
-        system_lang_code: en
+        app_version: 11.12.0
+        lang_code: ar
+        system_lang_code: ar
 
     # Custom server to connect to.
     server:
