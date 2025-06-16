@@ -78,6 +78,7 @@ jobs:
           MATRIX_DISCORD_HS_TOKEN: ${{ secrets.matrix_discord_hs_token }}
           MATRIX_DISCORD_SENDER_LOCALPART: ${{ secrets.matrix_discord_sender_localpart }}
           MATRIX_DISCORD_POSTGRES_PASSWORD: ${{ secrets.matrix_discord_postgres_password }}
+          MATRIX_DISCORD_MEDIA_SERVER_KEY: ${{ secrets.matrix_discord_media_server_key }}
         run: |
           sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
           sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
