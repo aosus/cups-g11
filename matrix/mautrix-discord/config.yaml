@@ -18,7 +18,7 @@ homeserver:
     # Endpoint for reporting per-message status.
     message_send_checkpoint_endpoint: null
     # Does the homeserver support https://github.com/matrix-org/matrix-spec-proposals/pull/2246?
-    async_media: false
+    async_media: true
 
 # Application service host/registration related details.
 # Changing these values requires regeneration of the registration.
