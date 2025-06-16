@@ -152,18 +152,21 @@ bridge:
     # Patterns for converting Discord media to custom mxc:// URIs instead of reuploading.
     # Each of the patterns can be set to null to disable custom URIs for that type of media.
     # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
-    media_patterns:
+    direct_media:
         # Should custom mxc:// URIs be used instead of reuploading media?
         enabled: true
-        # Pattern for normal message attachments.
-        attachments: mxc://aosus.org/discord_attachments|{{.ChannelID}}|{{.AttachmentID}}|{{.FileName}}
-        # Pattern for custom emojis.
-        emojis: mxc://aosus.org/discord_emojis|{{.ID}}.{{.Ext}}
-        # Pattern for stickers. Note that animated lottie stickers will not be converted if this is enabled.
-        stickers: mxc://aosus.org/discord_stickers|{{.ID}}.{{.Ext}}
-        # Pattern for static user avatars.
-        avatars: mxc://aosus.org/discord_avatars|{{.UserID}}|{{.AvatarID}}.{{.Ext}}
-    # Settings for converting animated stickers.
+        # The server name to use for the custom mxc:// URIs.
+        # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
+        # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
+        server_name: discord-media.matrix.aosus.org
+        # Optionally a custom .well-known response. This defaults to `server_name:443`
+        # well_known_response:
+        # The bridge supports MSC3860 media download redirects and will use them if the requester supports it.
+        # Optionally, you can force redirects and not allow proxying at all by setting this to false.
+        allow_proxy: true
+        # Matrix server signing key to make the federation tester pass, same format as synapse's .signing.key file.
+        # This key is also used to sign the mxc:// URIs to ensure only the bridge can generate them.
+        server_key: (matrix_discord_media_server_key)
     animated_sticker:
         # Format to which animated stickers should be converted.
         # disable - No conversion, send as-is (lottie JSON)

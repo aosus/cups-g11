@@ -96,6 +96,9 @@ services:
         target: /data/registration.yaml
       - source: mautrix-discord-config
         target: /data/config.yaml
+    networks:
+      default:
+      web:
 
   postgres-discord:
     image: postgres:14.18-alpine@sha256:5a8881bdd1afaaa4c95198dfb0a726340edca70b9f4893006bfa69d4bac30e22
@@ -107,17 +110,6 @@ services:
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
       - /home/aosus/matrix/mautrix-discord/postgres:/var/lib/postgresql/data:rw
-
-# Discord now requires signed URLs for their CDN, this resolver fetches signed urls using a user token, and redirects the user to it.
-  discord-resolver:
-    image: ghcr.io/aosus/discord_cdn:master@sha256:ebc338163e2035cfeb314cb4e0b9f6d36871d7455d052854aeae31a644ab5fed
-    # ports:
-    #   - 3000:3000
-    environment:
-      - TOKEN=(matrix_discord_resolver_account_token)
-      - CACHE=86400 # cache discord links for a day
-    networks:
-      - web
 
   eturnal:
     image: ghcr.io/processone/eturnal:edge@sha256:c8fdc2e8077af6b61e3d46701b627934b115f73fcf45c1860e6b9b848c405e50
