@@ -85,7 +85,7 @@ jobs:
           sed -i "s|(matrix_discord_postgres_password)|$MATRIX_DISCORD_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
           sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
           sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
-          sed -i "s|(matrix_discord_media_server_key))|$MATRIX_DISCORD_MEDIA_SERVER_KEY|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
+          sed -i "s|(matrix_discord_media_server_key)|$MATRIX_DISCORD_MEDIA_SERVER_KEY|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
 
       - name: Add secrets to compose
         env:
