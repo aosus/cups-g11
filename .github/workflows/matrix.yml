@@ -79,6 +79,7 @@ jobs:
           MATRIX_DISCORD_SENDER_LOCALPART: ${{ secrets.matrix_discord_sender_localpart }}
           MATRIX_DISCORD_POSTGRES_PASSWORD: ${{ secrets.matrix_discord_postgres_password }}
           MATRIX_DISCORD_MEDIA_SERVER_KEY: ${{ secrets.matrix_discord_media_server_key }}
+          MATRIX_DISCORD_AVATAR_PROXY_KEY: ${{ secrets.matrix_discord_avatar_proxy_key }}
         run: |
           sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
           sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
@@ -87,6 +88,7 @@ jobs:
           sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
           sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
           sed -i "s|(matrix_discord_media_server_key)|$MATRIX_DISCORD_MEDIA_SERVER_KEY|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
+          sed -i "s|(matrix_discord_avatar_proxy_key)|$MATRIX_DISCORD_AVATAR_PROXY_KEY|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
 
       - name: Add secrets to compose
         env:
