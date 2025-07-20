@@ -132,6 +132,8 @@ services:
     volumes:
       - askaosus-data:/app/data
       - askaosus-logs:/app/logs
+      - /home/aosus/matrix/askaosus/system_prompt.md:/app/system_prompt.md:ro
+      - /home/aosus/matrix/askaosus/responses.json:/app/responses.json:ro
     environment:
       # Python configuration
       - PYTHONUNBUFFERED=1
@@ -162,6 +164,7 @@ services:
       
       # Logging Configuration
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - BOT_UTM_TAGS="ref=askaosus&utm_medium=chat&utm_campaign=ai"
 
 configs:
   synapse-homeserver:
