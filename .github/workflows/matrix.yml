@@ -96,11 +96,19 @@ jobs:
           MATRIX_TELEGRAM_POSTGRES_PASSWORD: ${{ secrets.matrix_telegram_postgres_password }}
           MATRIX_DISCORD_POSTGRES_PASSWORD: ${{ secrets.matrix_discord_postgres_password }}
           MATRIX_DISCORD_RESOLVER_ACCOUNT_TOKEN: ${{ secrets.matrix_discord_resolver_account_token }}
+          MATRIX_ASKAOSUS_PASSWORD: ${{ secrets.matrix_askaosus_password }}
+          MATRIX_ASKAOSUS_APIKEY: ${{ secrets.matrix_askaosus_apikey }}
+          MATRIX_ASKAOSUS_USERNAME: ${{ secrets.matrix_askaosus_username }}
+          MATRIX_ASKAOSUS_LLM_APIKEY: ${{ secrets.matrix_askaosus_llm_apikey }}
         run: |
           sed -i "s|(matrix_postgres_password)|$POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
           sed -i "s|(matrix_telegram_postgres_password)|$MATRIX_TELEGRAM_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
           sed -i "s|(matrix_discord_postgres_password)|$MATRIX_DISCORD_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
           sed -i "s|(matrix_discord_resolver_account_token)|$MATRIX_DISCORD_RESOLVER_ACCOUNT_TOKEN|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
+          sed -i "s|(matrix_askaosus_password)|$MATRIX_ASKAOSUS_PASSWORD|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
+          sed -i "s|(matrix_askaosus_apikey)|$MATRIX_ASKAOSUS_APIKEY|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
+          sed -i "s|(matrix_askaosus_username)|$MATRIX_ASKAOSUS_USERNAME|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
+          sed -i "s|(matrix_askaosus_llm_apikey)|$MATRIX_ASKAOSUS_LLM_APIKEY|g" $GITHUB_WORKSPACE/matrix/docker-compose.yml
 
       - name: create file for secrets
         env:

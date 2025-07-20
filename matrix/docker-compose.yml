@@ -127,6 +127,42 @@ services:
       - source: eturnal
         target: /etc/eturnal.yml
 
+  askaosus:
+    image: ghcr.io/aosus/askaosus:latest
+    volumes:
+      - askaosus-data:/app/data
+      - askaosus-logs:/app/logs
+    environment:
+      # Python configuration
+      - PYTHONUNBUFFERED=1
+      
+      # Matrix Configuration
+      - MATRIX_HOMESERVER_URL=https://matrix.aosus.org
+      - MATRIX_USER_ID=@askaosus:aosus.org
+      - MATRIX_PASSWORD=(matrix_askaosus_password)
+      - MATRIX_DEVICE_NAME=askaosus-cups-g11
+      - MATRIX_STORE_PATH=/app/data/matrix_store
+      
+      # Discourse Configuration
+      - DISCOURSE_BASE_URL=https://discourse.aosus.org
+      - DISCOURSE_API_KEY=(matrix_askaosus_apikey)
+      - DISCOURSE_USERNAME=(matrix_askaosus_username)
+      
+      # LLM Configuration
+      - LLM_PROVIDER=openrouter
+      - LLM_API_KEY=(matrix_askaosus_llm_apikey)
+      - LLM_MODEL=google/gemini-2.0-flash-001
+      - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-500}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.7}
+      
+      # Bot Behavior Configuration
+      - BOT_RATE_LIMIT_SECONDS=${BOT_RATE_LIMIT_SECONDS:-1.0}
+      - BOT_MAX_SEARCH_RESULTS=${BOT_MAX_SEARCH_RESULTS:-5}
+      - BOT_DEBUG=${BOT_DEBUG:-false}
+      
+      # Logging Configuration
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+
 configs:
   synapse-homeserver:
     file: /home/aosus/matrix/homeserver.yaml
@@ -150,3 +186,5 @@ secrets:
 volumes:
   caddy_data:
     external: true
+  askaosus-data:
+  askaosus-logs:
