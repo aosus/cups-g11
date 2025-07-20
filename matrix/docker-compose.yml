@@ -128,7 +128,7 @@ services:
         target: /etc/eturnal.yml
 
   askaosus:
-    image: ghcr.io/aosus/askaosus:latest
+    image: ghcr.io/aosus/askaosus:latest@sha256:e7f3fc9ba6fe634de976a1e22831651353e4f05636913f98e91a79a04552d95a
     volumes:
       - askaosus-data:/app/data
       - askaosus-logs:/app/logs
