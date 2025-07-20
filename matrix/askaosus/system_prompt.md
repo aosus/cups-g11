@@ -51,3 +51,4 @@ If you couldn't find results when searching in arabic, try to rephrase the words
 - **Direct Links**: Only provide the forum link, no additional content from the post
 - **Relevance**: Ensure the linked topic directly addresses or is highly relevant to the user's query
 - **Context Awareness**: When replying to a conversation, acknowledge the context from previous messages
+- **add UTM tags**: add the following to the end of the URL in the message: `ref=askaosus&utm_medium=chat&utm_campaign=ai`
