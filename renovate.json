@@ -1,46 +1,66 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-      "config:base"
-    ],
-    "automergeSchedule": [
-      "after 9pm",
-      "before 10pm"
-    ],
-    "docker": {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "automergeSchedule": [
+    "after 9pm",
+    "before 10pm"
+  ],
+  "github-actions": {
+    "labels": [
+      "Action updates"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchCategories": [
+        "docker"
+      ],
       "automerge": true,
       "platformAutomerge": true,
       "pinDigests": true,
-      "labels": ["Container updates"]
+      "labels": [
+        "Container updates"
+      ]
     },
-    "github-actions": {
-      "labels": ["Action updates"]
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "automerge": true,
+      "platformAutomerge": true
     },
-    "packageRules": [
-      {
-        "matchDatasources": [
-          "docker"
-        ],
-        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-        "matchPackageNames": ["postgres"],
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchDatasources": [
-          "docker"
-        ],
-        "matchPackageNames": ["clickhouse/clickhouse-server"],
-        "enabled": false
-      },
-      {
-        "matchDatasources": [
-          "docker"
-        ],
-        "matchUpdateTypes": ["major"],
-        "matchPackageNames": ["postgres", "mariadb"],
-        "enabled": false
-      }
-    ]
-  }
-  
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "clickhouse/clickhouse-server"
+      ],
+      "enabled": false
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchPackageNames": [
+        "postgres",
+        "mariadb"
+      ],
+      "enabled": false
+    }
+  ]
+}
