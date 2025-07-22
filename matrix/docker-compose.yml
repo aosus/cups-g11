@@ -163,8 +163,8 @@ services:
       - BOT_DEBUG=${BOT_DEBUG:-false}
       
       # Logging Configuration
-      - LOG_LEVEL=${LOG_LEVEL:-INFO}
-      - BOT_UTM_TAGS="ref=askaosus&utm_medium=chat&utm_campaign=ai"
+      - LOG_LEVEL=LLM
+      - BOT_MENTIONS="@askaosus_bot, askaosus:, @askaosus"
 
 configs:
   synapse-homeserver:

@@ -1,18 +1,15 @@
 {
   "error_messages": {
-    "no_results_found": "للاسف لم اجد اي نتيجة جيدة, حاول اعادة صياغة سؤالك او اكتب موضوع على المجتمع https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai",
-    "processing_error": "حصل خطأ اثناء المعالجة, حاول لاحقا او زر مجتمعنا: https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai",
-    "search_error": "للاسف حصل خطأ اثناء البحث, عاود المحاولة لاحقا او زر مجتمعنا: https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai",
-    "fallback_error": "حصل خطأ اثناء المعالجة, حاول لاحقا او زر مجتمعنا: https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai"
+    "fallback_error": "حصل خطأ اثناء المعالجة, حاول لاحقا او زر مجتمعنا: https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai",
+    "rate_limit_error": "وصلت لحد طلبات المجتمع, ابحث بنفسك او حاول بعد قليل. https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai",
+    "discourse_unreachable": "مجتمع أسس يواجه مشاكل تقنية حاليا, https://discourse.aosus.org?ref=askaosus&utm_medium=chat&utm_campaign=ai",
+    "llm_down": "خدمة استضافة الLLM تواجه مشاكل, حاول مرة اخرى لاحقا."
   },
+
   "discourse_messages": {
     "no_results": "لا نتيجة ذو صلة",
     "untitled_post": "منشور دون عنوان",
     "untitled_topic": "موضوع دون عنوان",
     "default_excerpt": "موضوع في مجتمع أسس"
-  },
-  "system_messages": {
-    "perfect_match": ":وجدت موضوع يجاوب على سؤالك",
-    "closest_match": "هنا اقرب موضوع ذو صلة لسؤالك:"
   }
 }
