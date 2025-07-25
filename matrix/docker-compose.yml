@@ -164,7 +164,7 @@ services:
       
       # Logging Configuration
       - LOG_LEVEL=LLM
-      - BOT_MENTIONS="@askaosus_bot, askaosus:, @askaosus"
+#      - BOT_MENTIONS="@askaosus_bot, askaosus:, @askaosus"
 
 configs:
   synapse-homeserver:
