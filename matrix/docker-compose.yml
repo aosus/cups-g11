@@ -112,7 +112,7 @@ services:
       - /home/aosus/matrix/mautrix-discord/postgres:/var/lib/postgresql/data:rw
 
   eturnal:
-    image: ghcr.io/processone/eturnal:edge@sha256:c8fdc2e8077af6b61e3d46701b627934b115f73fcf45c1860e6b9b848c405e50
+    image: ghcr.io/processone/eturnal:1.12.1-r2@sha256:8043d266f18838cb469a5289ac444a90b7a2aa8b8ab503155b81a2601618a33b
     user: 0:0 # to access caddy certs
     ports:
       - '3478:3478'
