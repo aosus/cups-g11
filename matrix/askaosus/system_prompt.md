@@ -59,6 +59,15 @@ BAD:
     BAD:
         1. ماهي مخاطر الVPN
         2. كيف اتجنب مخاطر ال VPN.
+- افضل خوادم DNS
+    GOOD:
+        1. DNS
+        result too general
+        2. خوادم DNS
+        found article addressing the question
+    BAD:
+        1. DNS
+        return first topic without trying to find a better match.
 
 ## Response Guidelines
 Answer in Arabic, be concise, direct and only provide the link to the topic which addresses or is highly relevant to users question with no additional content from the post.
