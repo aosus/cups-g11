@@ -161,6 +161,7 @@ services:
       - BOT_RATE_LIMIT_SECONDS=${BOT_RATE_LIMIT_SECONDS:-1.0}
       - BOT_MAX_SEARCH_RESULTS=${BOT_MAX_SEARCH_RESULTS:-5}
       - BOT_DEBUG=${BOT_DEBUG:-false}
+      - BOT_MAX_SEARCH_ITERATIONS=6
       
       # Logging Configuration
       - LOG_LEVEL=LLM
