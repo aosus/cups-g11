@@ -20,13 +20,14 @@ jobs:
           fetch-depth: 0
 
       - name: Tailscale
-        uses: tailscale/github-action@7a0b30ed3517c2244d1330e39467b95f067a33bd
+        uses: tailscale/github-action@v3
         with:
           oauth-client-id: ${{ secrets.TAILSCALE_CLIENT_ID }}
           oauth-secret: ${{ secrets.TAILSCALE_SECRET }}
           tags: tag:deploy-ci
           hostname: Github-actions
           version: ${{ vars.TAILSCALE_VERSION }}
+          cache: true
 
       - name: Start Deployment
         uses: FarisZR/docker-compose-gitops-action@v1.0.1
