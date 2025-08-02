@@ -28,7 +28,7 @@ jobs:
           tags: tag:deploy-ci
           hostname: Github-actions
           version: ${{ vars.TAILSCALE_VERSION }}
-          cache: true
+          use-cache: true
 
       - name: Add secrets to compose
         env:
