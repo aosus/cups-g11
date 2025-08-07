@@ -128,7 +128,7 @@ services:
         target: /etc/eturnal.yml
 
   askaosus:
-    image: ghcr.io/aosus/askaosus:latest@sha256:41fd7388a1b4467ce253c570434f9cce9273a484e3745afda0a9acc82067ef67
+    image: ghcr.io/aosus/askaosus:latest@sha256:e46e8fb2788c019af406e4cd956181034252fba180b51369bf0b048526285df7
     volumes:
       - askaosus-data:/app/data
       - askaosus-logs:/app/logs
@@ -153,9 +153,10 @@ services:
       # LLM Configuration
       - LLM_PROVIDER=openrouter
       - LLM_API_KEY=(matrix_askaosus_llm_apikey)
-      - LLM_MODEL=google/gemini-2.0-flash-001
-      - LLM_MAX_TOKENS=500
-      - LLM_TEMPERATURE=2
+      - LLM_MODEL=openai/gpt-oss-120b
+      # - LLM_MAX_TOKENS=500
+      # - LLM_TEMPERATURE=2
+      - LLM_OPENROUTER_PROVIDER=groq
       
       # Bot Behavior Configuration
       - BOT_RATE_LIMIT_SECONDS=${BOT_RATE_LIMIT_SECONDS:-1.0}
