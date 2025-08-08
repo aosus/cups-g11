@@ -128,7 +128,7 @@ services:
         target: /etc/eturnal.yml
 
   askaosus:
-    image: ghcr.io/aosus/askaosus:latest@sha256:344a1daadd099d337e802a61da3e2eca4f84587ffa8a3e96341a85988a702dc8
+    image: ghcr.io/aosus/askaosus:latest@sha256:ee55b0922a6d65b6a26faca8d14572cabb197ccf9c2590ed5242ad6d4491ae40
     volumes:
       - askaosus-data:/app/data
       - askaosus-logs:/app/logs
@@ -160,9 +160,10 @@ services:
       
       # Bot Behavior Configuration
       - BOT_RATE_LIMIT_SECONDS=${BOT_RATE_LIMIT_SECONDS:-1.0}
-      - BOT_MAX_SEARCH_RESULTS=${BOT_MAX_SEARCH_RESULTS:-5}
+      - BOT_MAX_SEARCH_RESULTS=10
       - BOT_DEBUG=${BOT_DEBUG:-false}
       - BOT_MAX_SEARCH_ITERATIONS=6
+      - BOT_REPLY_BEHAVIOR=mention
       
       # Logging Configuration
       - LOG_LEVEL=LLM
