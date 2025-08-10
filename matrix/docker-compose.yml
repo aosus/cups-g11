@@ -163,7 +163,7 @@ services:
       - BOT_MAX_SEARCH_RESULTS=10
       - BOT_DEBUG=${BOT_DEBUG:-false}
       - BOT_MAX_SEARCH_ITERATIONS=6
-      - BOT_REPLY_BEHAVIOR=mention
+      - BOT_REPLY_BEHAVIOR=ignore
       
       # Logging Configuration
       - LOG_LEVEL=LLM
