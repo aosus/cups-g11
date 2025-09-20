@@ -94,7 +94,7 @@ env:
   DISCOURSE_S3_BACKUP_BUCKET: discourse-backups
   DISCOURSE_BACKUP_LOCATION: s3
   DISCOURSE_MAX_ADMIN_API_REQS_PER_MINUTE: 300
-
+  UNICORN_SIDEKIQ_MAX_RSS: 1500
 
 volumes:
   - volume:
@@ -119,11 +119,17 @@ hooks:
         cd: $home/plugins
         cmd:
           - git clone https://github.com/discourse/docker_manager.git
+          # - git clone https://github.com/discourse/discourse-reactions
           - git clone https://github.com/discourse/discourse-category-experts
+          - git clone https://github.com/discourse/discourse-solved
+          #- git clone https://github.com/davidtaylorhq/discourse-telegram-notifications
+          # - git clone https://github.com/discourse/discourse-chat-integration
+          # - git clone https://github.com/discourse/discourse-math
+          # - git clone https://github.com/discourse/discourse-gamification # Gamification
           - git clone https://github.com/discourse/discourse-yearly-review # yearly review
           - git clone https://github.com/paviliondev/discourse-legal-tools # GDPR data export and so on
           - git clone https://github.com/discourse/discourse-google-one-tap # Google one tap login
-          - git clone https://github.com/discourse/discourse-cakeday # Discourse cakeday and birthday plugin
+          - https://github.com/discourse/discourse-cakeday # Discourse cakeday and birthday plugin
 ## Remember, this is YAML syntax - you can only have one block with a name
 run:
   - exec: echo "Beginning of custom commands"
