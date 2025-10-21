@@ -123,7 +123,6 @@ hooks:
           - git clone https://github.com/discourse/discourse-yearly-review # yearly review
           - git clone https://github.com/paviliondev/discourse-legal-tools # GDPR data export and so on
           - git clone https://github.com/discourse/discourse-google-one-tap # Google one tap login
-          - git clone https://github.com/discourse/discourse-cakeday # Discourse cakeday and birthday plugin
 
 ## Remember, this is YAML syntax - you can only have one block with a name
 run:
