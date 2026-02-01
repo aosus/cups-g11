@@ -122,7 +122,7 @@ hooks:
           - git clone https://github.com/discourse/docker_manager.git
           - git clone https://github.com/discourse/discourse-category-experts
           - git clone https://github.com/discourse/discourse-yearly-review # yearly review
-          - git clone https://github.com/paviliondev/discourse-legal-tools # GDPR data export and so on
+          # - git clone https://github.com/paviliondev/discourse-legal-tools # GDPR data export and so on # BROKEN https://github.com/paviliondev/discourse-legal-tools/issues/21
           - git clone https://github.com/discourse/discourse-google-one-tap # Google one tap login
 
 ## Remember, this is YAML syntax - you can only have one block with a name
