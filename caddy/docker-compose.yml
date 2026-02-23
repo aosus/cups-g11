@@ -8,7 +8,7 @@ networks:
 
 services:
   caddy:
-    image: ghcr.io/fariszr/caddy-dns:cloudflare-alpine@sha256:bc58bd809012008c37295e1a50653db62978f71b32596a57fe78ce2caff146ba
+    image: ghcr.io/fariszr/caddy-dns:cloudflare-alpine@sha256:e2a784b68ae08faea833b723165a6a502a80e9c4cfc10feb0830048da648a05e
     container_name: caddy
     command: caddy run --watch --config /etc/caddy/Caddyfile --adapter caddyfile 
     cap_add:
