@@ -6,7 +6,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:14.22-alpine@sha256:7f1df46f4d5a4e7343ff6c33a839b81e64e50e0dbf2987291d720d78f2bb5187
+    image: postgres:14.22-alpine@sha256:64ce25a0bb68e598edc3944f2f58f39d1e8641755baa4ba5f7ddfa142ed85c63
     restart: always
     # These will be used in homeserver.yaml later on
     environment:
@@ -75,7 +75,7 @@ services:
       default:
 
   postgres-telegram:
-    image: postgres:14.22-alpine@sha256:7f1df46f4d5a4e7343ff6c33a839b81e64e50e0dbf2987291d720d78f2bb5187
+    image: postgres:14.22-alpine@sha256:64ce25a0bb68e598edc3944f2f58f39d1e8641755baa4ba5f7ddfa142ed85c63
     restart: always
     environment:
       - POSTGRES_DB=telegram
@@ -101,7 +101,7 @@ services:
       web:
 
   postgres-discord:
-    image: postgres:14.22-alpine@sha256:7f1df46f4d5a4e7343ff6c33a839b81e64e50e0dbf2987291d720d78f2bb5187
+    image: postgres:14.22-alpine@sha256:64ce25a0bb68e598edc3944f2f58f39d1e8641755baa4ba5f7ddfa142ed85c63
     restart: always
     environment:
       - POSTGRES_DB=discord
