@@ -66,11 +66,10 @@ services:
     container_name: mautrix-telegram
     restart: always
     image: dock.mau.dev/mautrix/telegram:v0.2604.0@sha256:e274e3bbfd641f59f1b6b82774dce6964babcd571d15e67538457422d765c763
-    configs:
-      - source: mautrix-telegram-appservice
-        target: /data/registration.yaml
-      - source: mautrix-telegram-config
-        target: /data/config.yaml
+    # Use bind mounts for config files so mautrix-telegram can write to them.
+    volumes:
+      - /home/aosus/matrix/mautrix-telegram/app-service-registration.yaml:/data/registration.yaml:rw
+      - /home/aosus/matrix/mautrix-telegram/config.yaml:/data/config.yaml:rw
     networks:
       default:
 
