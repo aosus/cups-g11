@@ -118,7 +118,7 @@ jobs:
           echo "$MATRIX_SIGNING_KEY" > $GITHUB_WORKSPACE/matrix/signing.key
 
       - name: Start Deployment
-        uses: FarisZR/docker-compose-gitops-action@v1.0.1
+        uses: FarisZR/docker-compose-gitops-action@v1.1
         with:
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys

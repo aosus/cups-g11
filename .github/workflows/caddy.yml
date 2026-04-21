@@ -36,7 +36,7 @@ jobs:
           sed -i "s|(cloudflare_token)|$CLOUDFLARE_TOKEN|g" $GITHUB_WORKSPACE/caddy/docker-compose.yml
 
       - name: Start Deployment
-        uses: FarisZR/docker-compose-gitops-action@v1.0.1
+        uses: FarisZR/docker-compose-gitops-action@v1.1
         env:
           EMAIL: ${{ secrets.email }}
         with:

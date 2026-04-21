@@ -39,7 +39,7 @@ jobs:
           sed -i "s|(aosus_wordpress_mariadb_root_password)|$MARIADB_ROOT_PASSWORD|g" $GITHUB_WORKSPACE/aosus-wordpress/docker-compose.yml
 
       - name: Start Deployment
-        uses: FarisZR/docker-compose-gitops-action@v1.0.1
+        uses: FarisZR/docker-compose-gitops-action@v1.1
         env:
           MARIADB_PASSWORD: ${{ secrets.aosus_wordpress_mariadb_password }}
           MARIADB_ROOT_PASSWORD: ${{ secrets.aosus_wordpress_mariadb_root_password }}
